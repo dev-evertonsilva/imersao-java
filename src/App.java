@@ -1,46 +1,40 @@
 import java.io.InputStream;
-import java.net.URI;
 import java.net.URL;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.net.http.HttpResponse.BodyHandlers;
 import java.util.List;
-import java.util.Map;
 
 public class App {
     public static void main(String[] args) throws Exception {
         
-        //pegar json http
-        String url = "https://raw.githubusercontent.com/alura-cursos/imersao-java/api/TopMovies.json";
-        URI endereco = URI.create(url);
-        var client = HttpClient.newHttpClient();
-        var request = HttpRequest.newBuilder(endereco).GET().build();
-        HttpResponse<String> response = client.send(request, BodyHandlers.ofString());
-
-        String body = response.body();          
-
-        // extrair só os dados que interessam (Titulo, poster, Classificação)
-        var parser = new JsonParser();
-        List<Map<String, String >> ListaDeFilmes = parser.parse(body);
+               
+          //pegar json http
+         String url = "https://api.mocki.io/v2/549a5d8b/NASA-APOD-JamesWebbSpaceTelescope";   
+         
+         var http = new ClienteHttp();
+         String json = http.buscaDados(url);         
 
         
         //exibir e manipular os dados
+        ExtratorNasa extrator = new ExtratorNasa();
+        List<Conteudo> conteudos = extrator.extraiCouteudos(json);
+
         var geradora = new GeradoraDeFigurinhas();
-        for (Map<String,String> filme : ListaDeFilmes) {
 
+        for (int i = 0; i < 3; i++){
 
-            String urlImagem = filme.get("image");
-            String titulo = filme.get("title");
+            Conteudo conteudo = conteudos.get(i);
 
-            InputStream inputStream = new URL(urlImagem).openStream();
-            String nomeArquivo = titulo + ".png";
+            InputStream inputStream = new URL(conteudo.getUrlImagem()).openStream();
+            String nomeArquivo = "saida/" + conteudo.getTitulo() + ".png";
 
             geradora.criar(inputStream, nomeArquivo);
-            System.out.println(titulo);
+
+            System.out.println(conteudo.getTitulo());
             System.out.println();
-            
+
         }
+        
+
+
 
 
     }
