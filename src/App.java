@@ -6,15 +6,19 @@ public class App {
     public static void main(String[] args) throws Exception {
         
                
-          //pegar json http
-         String url = "https://api.mocki.io/v2/549a5d8b/NASA-APOD-JamesWebbSpaceTelescope";   
+          //pegar json http NASA
+         //String url = "https://api.mocki.io/v2/549a5d8b/NASA-APOD-JamesWebbSpaceTelescope";  
+         //ExtratorDeConteudo extrator = new ExtratorNasa();
+
+          //pegar json http IMDB
+         String url = "https://api.mocki.io/v2/549a5d8b/MostPopularTVs";
+         ExtratorDeConteudo extrator = new ExtratorIMDB();
          
          var http = new ClienteHttp();
          String json = http.buscaDados(url);         
 
         
-        //exibir e manipular os dados
-        ExtratorNasa extrator = new ExtratorNasa();
+        //exibir e manipular os dados       
         List<Conteudo> conteudos = extrator.extraiCouteudos(json);
 
         var geradora = new GeradoraDeFigurinhas();

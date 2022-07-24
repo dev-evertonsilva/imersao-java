@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ExtratorIMDB {
+public class ExtratorIMDB implements ExtratorDeConteudo{
     
     public List<Conteudo> extraiCouteudos(String json){
 
