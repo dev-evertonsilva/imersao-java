@@ -11,9 +11,13 @@ public class App {
          //ExtratorDeConteudo extrator = new ExtratorNasa();
 
           //pegar json http IMDB
-         String url = "https://api.mocki.io/v2/549a5d8b/MostPopularTVs";
-         ExtratorDeConteudo extrator = new ExtratorIMDB();
-         
+         //String url = "https://api.mocki.io/v2/549a5d8b/MostPopularTVs";
+         //ExtratorDeConteudo extrator = new ExtratorIMDB();
+
+          //pegar json http HEROKU
+          String url = "https://imersao-linguagens-api2.herokuapp.com/linguagens";
+          ExtratorDeConteudo extrator = new ExtratorIMDB();
+
          var http = new ClienteHttp();
          String json = http.buscaDados(url);         
 

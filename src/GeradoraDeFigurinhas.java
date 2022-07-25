@@ -33,12 +33,12 @@ public class GeradoraDeFigurinhas {
         graphics.drawImage(imagemOriginal, 0, 0, null);
 
         //configurar a fonte da figurinha
-        var font = new Font(Font.SANS_SERIF, Font.BOLD, 64);
+        var font = new Font(Font.SANS_SERIF, Font.BOLD, 32);
         graphics.setColor(Color.YELLOW);
         graphics.setFont(font);
 
         //escrever uma frase na imagem
-        graphics.drawString("TOPZERA", 100, novoAltura - 100);
+        graphics.drawString("TOPZERA", 50, novoAltura - 100);
 
         //escrever nova imagem em um arquivo
         ImageIO.write(novaImage, "png", new File(nomeArquivo));
